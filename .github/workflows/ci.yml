@@ -9,7 +9,6 @@ on:
 env:
   CARGO_TERM_COLOR: always
   CARGO_INCREMENTAL: 0
-  RUSTFLAGS: "-C target-feature=+crt-static"
   SCCACHE_GHA_ENABLED: "true"
   RUSTC_WRAPPER: "sccache"
 
@@ -38,11 +37,13 @@ jobs:
       - name: Check formatting
         run: cargo fmt --check
 
-      - name: Build (musl)
-        run: cargo build --release --target x86_64-unknown-linux-musl
-
-      - name: Test
+      - name: Test (native)
         run: cargo test --release
+
+      - name: Build (musl)
+        env:
+          RUSTFLAGS: "-C target-feature=+crt-static -C link-arg=-fuse-ld=mold"
+        run: cargo build --release --target x86_64-unknown-linux-musl
 
       - name: Upload binary
         uses: actions/upload-artifact@v4

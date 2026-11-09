@@ -1,6 +1,6 @@
+use azalea::ServerAddr;
 use azalea::account::Account;
 use azalea::prelude::*;
-use azalea::ServerAddr;
 use eyre::Result;
 use std::env;
 use std::str::FromStr;

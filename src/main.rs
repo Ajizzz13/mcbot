@@ -16,7 +16,7 @@ async fn main() -> Result<()> {
     let server_str = env::var("MC_SERVER").unwrap_or_else(|_| "localhost".to_string());
     let server = ServerAddr::from_str(&server_str)?;
 
-    tracing::info!(0sername, erver_str, "starting bot");
+    tracing::info!(%username, %server_str, "starting bot");
 
     let account = Account::offline(&username);
 

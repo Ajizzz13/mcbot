@@ -1,0 +1,16 @@
+[package]
+name = "mcbot"
+version = "0.1.0"
+edition = "2024"
+description = "Minecraft bot built with Azalea (Rust)"
+license = "MIT"
+
+[dependencies]
+azalea = "0.16"
+eyre = "0.6"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"

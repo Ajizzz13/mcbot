@@ -18,6 +18,8 @@ jobs:
 
       - name: Install Rust toolchain (nightly)
         uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rustfmt, clippy
 
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2

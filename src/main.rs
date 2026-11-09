@@ -18,11 +18,12 @@ async fn main() -> Result<()> {
 
     let account = Account::offline(&username);
 
-    ClientBuilder::new()
+    let _exit = ClientBuilder::new()
         .set_handler(handle)
         .start(account, server_str)
-        .await
-        .map_err(|e| eyre::eyre!(e))
+        .await;
+
+    Ok(())
 }
 
 #[derive(Clone, Component, Default)]

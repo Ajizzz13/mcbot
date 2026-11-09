@@ -6,7 +6,7 @@ description = "Minecraft bot built with Azalea (Rust)"
 license = "MIT"
 
 [dependencies]
-azalea = "0.16"
+azalea = "0.16.0+mc26.3"
 eyre = "0.6"
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 tracing = "0.1"

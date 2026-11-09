@@ -1,10 +1,10 @@
-use azalea::prelude::*;
 use azalea::account::Account;
+use azalea::prelude::*;
 use azalea::ServerAddr;
+use eyre::Result;
 use std::env;
 use std::str::FromStr;
 use tracing_subscriber::EnvFilter;
-use eyre::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {

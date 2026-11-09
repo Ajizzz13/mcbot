@@ -9,6 +9,9 @@ on:
 env:
   CARGO_TERM_COLOR: always
   CARGO_INCREMENTAL: 0
+  RUSTFLAGS: "-C link-arg=-fuse-ld=mold"
+  SCCACHE_GHA_ENABLED: "true"
+  RUSTC_WRAPPER: "sccache"
 
 jobs:
   build:
@@ -17,8 +20,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install mold linker
+        run: sudo apt-get update && sudo apt-get install -y mold
+
+      - name: sccache
+        uses: mozilla-actions/sccache-action@v0.0.11
+
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: ci
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+          cache-on-failure: true
 
       - name: Check formatting
         run: cargo fmt --check
@@ -28,3 +41,10 @@ jobs:
 
       - name: Test
         run: cargo test --release
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcbot-linux-x86_64
+          path: target/release/mcbot
+          retention-days: 30

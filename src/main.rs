@@ -1,6 +1,6 @@
+use azalea::ClientBuilder;
 use azalea::account::Account;
 use azalea::prelude::*;
-use azalea::ClientBuilder;
 use eyre::Result;
 use std::env;
 use tracing_subscriber::EnvFilter;

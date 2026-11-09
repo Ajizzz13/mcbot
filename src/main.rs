@@ -1,9 +1,8 @@
-use azalea::ServerAddr;
 use azalea::account::Account;
 use azalea::prelude::*;
+use azalea::ClientBuilder;
 use eyre::Result;
 use std::env;
-use std::str::FromStr;
 use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
@@ -14,7 +13,6 @@ async fn main() -> Result<()> {
 
     let username = env::var("MC_USERNAME").unwrap_or_else(|_| "mcbot".to_string());
     let server_str = env::var("MC_SERVER").unwrap_or_else(|_| "localhost".to_string());
-    let server = ServerAddr::from_str(&server_str)?;
 
     tracing::info!(%username, %server_str, "starting bot");
 
@@ -22,7 +20,7 @@ async fn main() -> Result<()> {
 
     ClientBuilder::new()
         .set_handler(handle)
-        .start(account, server)
+        .start(account, server_str)
         .await
         .map_err(|e| eyre::eyre!(e))
 }

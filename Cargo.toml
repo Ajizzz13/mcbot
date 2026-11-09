@@ -1,4 +1,4 @@
-cargo-features = ["edition2024", "if_let_guard"]
+cargo-features = ["edition2024"]
 
 [package]
 name = "mcbot"

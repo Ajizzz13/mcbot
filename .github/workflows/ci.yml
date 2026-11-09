@@ -8,6 +8,7 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
 
 jobs:
   build:
@@ -16,19 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Rust toolchain (nightly)
-        uses: dtolnay/rust-toolchain@nightly
-        with:
-          components: rustfmt, clippy
-
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
 
       - name: Check formatting
-        run: cargo +nightly fmt --check
+        run: cargo fmt --check
 
       - name: Build
-        run: cargo +nightly build --release
+        run: cargo build --release
 
       - name: Test
-        run: cargo +nightly test --release
+        run: cargo test --release

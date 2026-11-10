@@ -6,9 +6,9 @@ description = "Minecraft bot built with Azalea (Rust)"
 license = "MIT"
 
 [dependencies]
-azalea = { git = "https://github.com/azalea-rs/azalea", branch = "26.3" }
+azalea = { git = "https://github.com/azalea-rs/azalea", branch = "26.3", default-features = false, features = ["serde", "online-mode"] }
 eyre = "0.6"
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "time"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 

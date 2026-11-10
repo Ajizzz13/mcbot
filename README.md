@@ -18,6 +18,7 @@ Environment variables:
 
 - `MC_USERNAME` — bot username (default `mcbot`). Use an email for Microsoft accounts.
 - `MC_SERVER` — server address (default `localhost`).
+- `MC_PASSWORD` — optional password for auto-`/register` and auto-`/login` on AuthMe-style servers.
 
 ## CI
 

@@ -214,6 +214,7 @@ async fn handle(bot: Client, event: Event, state: State) -> Result<()> {
         Event::Login => {
             if let Ok(mut rt) = state.runtime.lock() {
                 rt.authenticated = state.password.is_none();
+                rt.home_pos = None;
                 rt.last_auth_at = None;
                 rt.spawned_at = None;
                 rt.last_tick_at = None;
@@ -232,7 +233,7 @@ async fn handle(bot: Client, event: Event, state: State) -> Result<()> {
             if let Ok(mut rt) = state.runtime.lock() {
                 rt.spawned_at = Some(Instant::now());
                 rt.next_idle_at = Instant::now() + Duration::from_secs(4);
-                if rt.home_pos.is_none() {
+                if dimension != "aternos:lobby" && rt.home_pos.is_none() {
                     rt.home_pos = pos;
                 }
                 if state.password.is_none() {
@@ -244,6 +245,7 @@ async fn handle(bot: Client, event: Event, state: State) -> Result<()> {
         Event::Disconnect(reason) => {
             if let Ok(mut rt) = state.runtime.lock() {
                 rt.authenticated = state.password.is_none();
+                rt.home_pos = None;
                 rt.last_auth_at = None;
                 rt.spawned_at = None;
                 rt.last_tick_at = None;
@@ -454,6 +456,7 @@ fn run_ai_tick(bot: &Client, state: &State) {
             return;
         };
         if !rt.authenticated
+            && rt.last_auth_at.is_none()
             && rt
                 .spawned_at
                 .is_some_and(|t| t.elapsed() >= AUTH_FALLBACK_DELAY)

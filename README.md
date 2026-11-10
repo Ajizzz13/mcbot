@@ -16,9 +16,11 @@ MC_USERNAME=bot MC_SERVER=play.example.com cargo run --release
 
 Environment variables:
 
-- `MC_USERNAME` — bot username (default `mcbot`). Use an email for Microsoft accounts.
+- `MC_USERNAME` — bot username (default `RakaPratama`). Use an email for Microsoft accounts.
 - `MC_SERVER` — server address (default `localhost`).
 - `MC_PASSWORD` — optional password for auto-`/register` and auto-`/login` on AuthMe-style servers.
+
+In-game AI behaviors: auto-defend against melee mobs, evade creepers, eat food from hotbar when hungry, explore around spawn/home, look at nearby players, and respond to `!help`, `!status`, `!sini`, `!ikut`, `!diam`, `!jalan` or natural mentions.
 
 ## CI
 

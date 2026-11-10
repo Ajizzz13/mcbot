@@ -294,9 +294,7 @@ fn handle_system_chat(bot: &Client, state: &State, content: &str) {
         .runtime
         .lock()
         .map(|mut rt| {
-            let ready = rt
-                .last_auth_at
-                .is_none_or(|t| t.elapsed() >= AUTH_COOLDOWN);
+            let ready = rt.last_auth_at.is_none_or(|t| t.elapsed() >= AUTH_COOLDOWN);
             if ready {
                 rt.last_auth_at = Some(Instant::now());
             }
@@ -413,9 +411,7 @@ fn can_send_chat(state: &State) -> bool {
         .runtime
         .lock()
         .map(|mut rt| {
-            let ready = rt
-                .last_chat_at
-                .is_none_or(|t| t.elapsed() >= CHAT_COOLDOWN);
+            let ready = rt.last_chat_at.is_none_or(|t| t.elapsed() >= CHAT_COOLDOWN);
             if ready {
                 rt.last_chat_at = Some(Instant::now());
             }
@@ -575,8 +571,7 @@ fn handle_threats(bot: &Client, state: &State, mode: &BotMode) -> bool {
                 ready
             })
             .unwrap_or(false);
-        if should_escape
-            && let (Ok(my_pos), Ok(creeper_pos)) = (bot.position(), nearest.position())
+        if should_escape && let (Ok(my_pos), Ok(creeper_pos)) = (bot.position(), nearest.position())
         {
             let dx = my_pos.x - creeper_pos.x;
             let dz = my_pos.z - creeper_pos.z;

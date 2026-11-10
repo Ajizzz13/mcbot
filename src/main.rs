@@ -202,9 +202,18 @@ mod tests {
 
     #[test]
     fn ignores_auth_success_and_unrelated_messages() {
-        assert_eq!(detect_auth_command("Successfully registered!", "secret123"), None);
-        assert_eq!(detect_auth_command("You are already logged in.", "secret123"), None);
-        assert_eq!(detect_auth_command("Welcome to the server!", "secret123"), None);
+        assert_eq!(
+            detect_auth_command("Successfully registered!", "secret123"),
+            None
+        );
+        assert_eq!(
+            detect_auth_command("You are already logged in.", "secret123"),
+            None
+        );
+        assert_eq!(
+            detect_auth_command("Welcome to the server!", "secret123"),
+            None
+        );
         assert_eq!(detect_auth_command("Use /register <pw>", ""), None);
     }
 }

@@ -1,3 +1,4 @@
+use azalea::BlockPos;
 use azalea::ClientBuilder;
 use azalea::JoinOpts;
 use azalea::account::Account;
